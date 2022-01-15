@@ -5,6 +5,24 @@ class TreeNode:
         self.right = None
 
 
+def display_tree(data, level, space='\t'):
+    if data is None:
+        return
+    if data.right is None and data.left is None:
+        pass
+    elif data.right is None:
+        print(f"{space*(level+1)} Ω")
+    else:
+        display_tree(data.right, level+1, space='\t')
+    print(f"{space*level} {data.key}")
+    if data.right is None and data.left is None:
+        pass
+    elif data.left is None:
+        print(f"{space*(level+1)} Ω")
+    else:
+        display_tree(data.left, level+1, space='\t')
+
+
 def create_tree(data):
     if isinstance(data, tuple) and len(data) == 3:
         node = TreeNode(data[1])
@@ -34,7 +52,7 @@ def create_tuple(tree):
 
 tree_tuple = (1, 3, None), 2, ((None, 3, 4), 5, (6, 7, 8))
 binary_tree = create_tree(tree_tuple)
-
+display_tree(binary_tree, 0)
 tree_tuple_derived = create_tuple(binary_tree)
 
 print(tree_tuple_derived)
